@@ -78,6 +78,8 @@ public class SettingsActivity extends Activity {
 
     private static final long WAIT_BEFORE_RESTART = 250;
 
+    public static final String PREF_THEME_STYLE_KEY = "pref_theme_style";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +105,7 @@ public class SettingsActivity extends Activity {
 
         private String mPreferenceKey;
         private boolean mPreferenceHighlighted = false;
+        private ListPreference mThemeStyle;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -179,6 +182,18 @@ public class SettingsActivity extends Activity {
                     int index = hotseatColumns.findIndexOfValue((String) newValue);
                     hotseatColumns.setSummary(hotseatColumns.getEntries()[index]);
                     restart(getActivity());
+		    return true;
+		}
+	    });
+
+            mThemeStyle = (ListPreference) findPreference(PREF_THEME_STYLE_KEY);
+            mThemeStyle.setSummary(mThemeStyle.getEntry());
+            mThemeStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    String newValue = (String) o;
+                    int valueIndex = mThemeStyle.findIndexOfValue(newValue);
+                    mThemeStyle.setSummary(mThemeStyle.getEntries()[valueIndex]);
                     return true;
                 }
             });
