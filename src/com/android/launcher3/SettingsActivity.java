@@ -43,6 +43,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
@@ -196,6 +197,13 @@ public class SettingsActivity extends Activity {
                     String newValue = (String) o;
                     int valueIndex = mThemeStyle.findIndexOfValue(newValue);
                     mThemeStyle.setSummary(mThemeStyle.getEntries()[valueIndex]);
+                    return true;
+                }
+            });
+            SwitchPreference showQsbWidget = (SwitchPreference) findPreference(Utilities.QSB_SHOW);
+            showQsbWidget.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    restart(getActivity());
                     return true;
                 }
             });

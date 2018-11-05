@@ -134,6 +134,7 @@ public final class Utilities {
     public static final String GRID_COLUMNS = "pref_grid_columns";
     public static final String GRID_ROWS = "pref_grid_rows";
     public static final String HOTSEAT_ICONS = "pref_hotseat_icons";
+    public static final String QSB_SHOW = "pref_qsb_show";
 
     public static boolean isPropertyEnabled(String propertyName) {
         return Log.isLoggable(propertyName, Log.VERBOSE);
@@ -163,6 +164,10 @@ public final class Utilities {
         } catch (Exception e) {
             return preferenceFallback;
         }
+    }
+
+    public static boolean showQsbWidget(Context context) {
+         return getPrefs(context).getBoolean(QSB_SHOW, FeatureFlags.QSB_ON_FIRST_SCREEN);
     }
 
     /**
